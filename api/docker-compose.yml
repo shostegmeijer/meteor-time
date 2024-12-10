@@ -1,0 +1,21 @@
+name: meteor-time
+version: "3.9"
+services:
+    meteor-time-redis:
+        container_name: meteor-time-redis
+        image: "redis:7.2.5-alpine"
+        ports:
+            - "127.0.0.1:4001:6379"
+
+    meteor-time-mongo:
+        container_name: meteor-time-mongo
+        image: mongo:6.0.4
+        volumes:
+            - mongodb:/data/db
+            - mongodb_config:/data/configdb
+        restart: always
+        ports:
+            - "127.0.0.1:4002:27017"
+volumes:
+    mongodb:
+    mongodb_config:

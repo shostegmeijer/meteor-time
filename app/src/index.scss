@@ -1,0 +1,16 @@
+@import "./fonts";
+@import "./variables";
+
+:root {
+    font-size: 14px;
+}
+
+body {
+    margin: 0;
+    padding: 1em;
+
+    background: #030307;
+    color: white;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}

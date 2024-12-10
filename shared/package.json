@@ -1,0 +1,23 @@
+{
+    "name": "@meteor-time/shared",
+    "type": "module",
+    "version": "0.0.1",
+    "description": "",
+    "main": "dist/index.js",
+    "devDependencies": {},
+    "scripts": {
+        "build": "tsc",
+        "build:watch": "tsc --watch"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/shostegmeijer/meteor-time.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/shostegmeijer/meteor-time/issues"
+    },
+    "homepage": "https://github.com/shostegmeijer/meteor-time#readme"
+}

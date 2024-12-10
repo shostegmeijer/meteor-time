@@ -1,0 +1,21 @@
+{
+  "name": "meteor-time",
+  "version": "0.0.1",
+  "description": "",
+  "scripts": {
+    "postinstall": "npm run build --workspace=shared --workspace=api"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5",
+    "prettier-plugin-organize-imports": "^3.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shostegmeijer/meteor-time.git"
+  },
+  "workspaces": [
+    "api",
+    "app",
+    "shared"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "incremental": true,
+        "target": "es5",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "lib": ["dom", "dom.iterable", "esnext"],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "noFallthroughCasesInSwitch": true,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "react-jsx",
+        "paths": {
+            "@mui/material": ["./node_modules/@mui/joy"]
+        },
+        "resolveJsonModule": true
+    },
+    "references": [{ "path": "../shared" }]
+}
