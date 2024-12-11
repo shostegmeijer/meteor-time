@@ -1,4 +1,3 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import * as PIXI from 'pixi.js';
 import { GlowFilter } from '@pixi/filter-glow';
@@ -144,7 +143,8 @@ class Meteor {
         this.sprite.x += Math.cos(this.angle) * this.speed;
         this.sprite.y += Math.sin(this.angle) * this.speed;
 
-        this.opacity = 0.3 + Math.random() * 0.7;
+        // Stronger fade away effect
+        this.opacity -= 0.015
         this.sprite.alpha = this.opacity;
 
         if (this.sprite.y > this.maxHeight + 100 || this.sprite.x > this.maxWidth + 100) {
@@ -186,6 +186,7 @@ const MeteorParticleEngine: React.FC<MeteorParticleEngineProps> = ({ meteorType 
             );
         }
         stars.endFill();
+        stars.filters = [new GlowFilter({ distance: 15, outerStrength: 2, innerStrength: 1, color: 0xffffff })];
         app.stage.addChild(stars);
 
         const meteors = Array.from({ length: meteorCount }, () =>

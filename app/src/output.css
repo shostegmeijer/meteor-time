@@ -557,12 +557,28 @@ video {
   position: relative;
 }
 
+.inset-12 {
+  inset: 3rem;
+}
+
+.inset-8 {
+  inset: 2rem;
+}
+
+.inset-4 {
+  inset: 1rem;
+}
+
 .left-0 {
   left: 0px;
 }
 
 .top-0 {
   top: 0px;
+}
+
+.bottom-0 {
+  bottom: 0px;
 }
 
 .-z-10 {
