@@ -4,6 +4,7 @@
         "target": "esnext",
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
+        "resolveJsonModule": true,
         "outDir": "dist",
         "removeComments": true,
         "noImplicitAny": true,
