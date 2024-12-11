@@ -1,0 +1,48 @@
+{
+  "events": [
+    {
+      "dateTime": "2025-Jan-03 15:00",
+      "description": "Quadrantid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Apr-22 13:00",
+      "description": "Lyrid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-May-05 02:00",
+      "description": "Eta-Aquarid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Jul-28 04:00",
+      "description": "Delta-Aquarid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Aug-12 20:00",
+      "description": "Perseid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Oct-21 12:00",
+      "description": "Orionid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Nov-05 13:00",
+      "description": "S Taurid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Nov-12 12:00",
+      "description": "N Taurid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Nov-17 18:00",
+      "description": "Leonid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Dec-14 07:00",
+      "description": "Geminid Meteor Shower"
+    },
+    {
+      "dateTime": "2025-Dec-22 16:00",
+      "description": "Ursid Meteor Shower"
+    }
+  ]
+}
