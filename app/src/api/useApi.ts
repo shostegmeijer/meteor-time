@@ -2,12 +2,17 @@ import { useCallback } from "react";
 
 
 export const useApi = () => {
-    const fetchHelloWorld = useCallback(async (): Promise<{ greeting: string }> => {
-        return await fetchJson<{ greeting: string }>(`/api/hello`);
+    const fetchShowers = useCallback(async (): Promise<{ greeting: string }> => {
+        return await fetchJson<{ greeting: string }>(`/api/showers`);
+    }, []);
+
+    const fetchNeoWs = useCallback(async (): Promise<{ greeting: string }> => {
+        return await fetchJson<{ greeting: string }>(`/api/neows`);
     }, []);
 
     return {
-        fetchHelloWorld
+        fetchShowers,
+        fetchNeoWs
     };
 };
 
