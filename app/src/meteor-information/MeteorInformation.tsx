@@ -1,10 +1,13 @@
-import { Button, Card, IconButton, Text } from '@radix-ui/themes';
+import { Button, Card, IconButton, Text, Separator } from '@radix-ui/themes';
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'motion/react';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { ShowerDetails } from '../api/useApi';
 
-export const MeteorInformation: React.FC<{ details: ShowerDetails | null; image: string | null }> = ({ details, image }) => {
+export const MeteorInformation: React.FC<{
+    details: ShowerDetails | null;
+    image: string | null;
+}> = ({ details, image }) => {
     const [open, setOpen] = useState(false);
 
     return (
@@ -19,56 +22,129 @@ export const MeteorInformation: React.FC<{ details: ShowerDetails | null; image:
                         exit={{ y: '100%', opacity: 0 }}
                         className="fixed inset-4"
                     >
-                        <Card className="w-full min-h-full grid grid-cols-2 gap-8">
-                            {image && <img src={image} className='rounded-md' />}
-                            <div>
-                                <header>
-                                    <IconButton
-                                        className="top-4 right-4 absolute"
-                                        variant="solid"
-                                        onClick={() => setOpen(false)}
-                                    >
-                                        <Cross2Icon />
-                                    </IconButton>
-                                </header>
-                                <main>
-                                    <Text as="p" size="8" className="mb-4">
+                        <Card className="p-0">
+                            <div className="w-full grid grid-cols-2 gap-6 p-6 overflow-auto max-h-[calc(100vh-4rem)]">
+                                <div className="flex flex-col gap-2">
+                                    {image && <img src={image} className="rounded-md mb-4" />}
+                                    <Text as="p" size="6" weight="bold">
                                         {details.fullName}
                                     </Text>
-                                    <div className="flex flex-col gap-4">
-                                        <Text size="7" weight="bold">
+                                    <Separator my="1" size="4" />
+                                    <div className="mt-2 flex flex-col gap-2">
+                                        <Text size="5" weight="bold">
                                             Discovery
                                         </Text>
-                                        <Text as="p" size="5">
+                                        <Separator my="1" size="4" />
+                                        <Text as="p" size="4">
                                             {details.discovery.discovery}
                                         </Text>
                                     </div>
-
-                                    <div className="flex flex-col gap-4">
-                                        <Text size="7" weight="bold">
+                                    <div className="mt-2 flex flex-col gap-2">
+                                        <Text size="5" weight="bold">
                                             Physical Parameters
                                         </Text>
+                                        <Separator my="1" size="4" />
                                         {details.physicalParameters.map((parameter, index) => (
-                                            <div
-                                                style={{
-                                                    display: 'grid',
-                                                    gridGap: '1rem',
-                                                    gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-                                                }}
-                                            >
-                                                <Text as="p" size="6" weight="bold">
+                                            <div key={index} className="grid grid-cols-2 gap-1">
+                                                <Text
+                                                    as="p"
+                                                    size="4"
+                                                    weight="bold"
+                                                    className="capitalize"
+                                                >
                                                     {parameter.title}
                                                 </Text>
-                                                <Text as="p" size="5">
+                                                <Text as="p" size="3">
                                                     {parameter.value} {parameter.units}
                                                 </Text>
-                                                <Text as="p" size="5" className="col-span-2">
+                                                <Text
+                                                    as="p"
+                                                    size="3"
+                                                    className="col-span-2 capitalize"
+                                                >
                                                     {parameter.description}
                                                 </Text>
                                             </div>
                                         ))}
                                     </div>
-                                </main>
+                                </div>
+                                <div>
+                                    <header>
+                                        <IconButton
+                                            className="top-6 right-10 absolute"
+                                            variant="solid"
+                                            onClick={() => setOpen(false)}
+                                        >
+                                            <Cross2Icon />
+                                        </IconButton>
+                                    </header>
+                                    <main className="flex flex-col gap-4">
+                                        <div className="flex flex-col gap-2">
+                                            <Text size="5" weight="bold">
+                                                Orbital Information
+                                            </Text>
+                                            <Separator my="1" size="4" />
+                                            <Text as="p" size="4" weight="bold">
+                                                {(
+                                                    details.orbitalInformation
+                                                        .firstObservation as unknown as Date
+                                                ).toDateString()}
+                                            </Text>
+                                            {details.orbitalInformation.elements.map(
+                                                (element, index) => (
+                                                    <div
+                                                        key={index}
+                                                        className="flex flex-col gap-1"
+                                                    >
+                                                        <Text
+                                                            as="p"
+                                                            size="4"
+                                                            className="capitalize"
+                                                        >
+                                                            {element.title}:{' '}
+                                                            <Text weight="bold">
+                                                                {element.value}
+                                                            </Text>
+                                                            &nbsp;
+                                                            {element.units}
+                                                        </Text>
+                                                    </div>
+                                                ),
+                                            )}
+                                        </div>
+                                        <div className="mt-2 flex flex-col gap-2">
+                                            <Text size="5" weight="bold">
+                                                Historical Events
+                                            </Text>
+                                            <Separator my="1" size="4" />
+                                            {details.historicalApproaches.map((approach, index) => (
+                                                <div key={index} className="flex flex-col gap-1">
+                                                    <Text as="p" size="4" weight="bold">
+                                                        {(
+                                                            approach.date as unknown as Date
+                                                        ).toDateString()}
+                                                    </Text>
+                                                    <Text as="p" size="3">
+                                                        <Text weight="bold">
+                                                            Distance to Earth:
+                                                        </Text>
+                                                        &nbsp;
+                                                        {approach.distanceToEarthInAu} AU
+                                                    </Text>
+                                                    <Text
+                                                        as="p"
+                                                        size="3"
+                                                        className="col-span-2 capitalize"
+                                                    >
+                                                        <Text weight="bold">Relative speed:</Text>
+                                                        &nbsp;
+                                                        {approach.relativeVelocityInKmPerSec} km/s
+                                                    </Text>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </main>
+                                </div>
                             </div>
                         </Card>
                     </motion.div>

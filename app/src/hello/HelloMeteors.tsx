@@ -29,10 +29,7 @@ export const HelloMeteors = () => {
         }
     };
 
-    const timeTillShower = useCountdown(
-        new Date(shower?.dateTime || 0),
-        showNotification,
-    );
+    const timeTillShower = useCountdown(new Date(shower?.dateTime || 0), showNotification);
 
     return (
         <>
@@ -51,7 +48,7 @@ export const HelloMeteors = () => {
                 >
                     {notificationEnabled ? 'Notifications Enabled' : 'Enable Notifications'}
                 </Button>
-                <MeteorInformation details={upcomingShowerDetails} image={shower.image} />
+                <MeteorInformation details={upcomingShowerDetails} image={shower?.image ?? null} />
             </div>
         </>
     );
