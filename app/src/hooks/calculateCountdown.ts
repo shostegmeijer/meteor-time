@@ -7,8 +7,8 @@ interface TimeLeft {
   seconds: number;
 }
 
-const calculateTimeLeft = (targetDate: Date) => {
-  const difference = +targetDate - +new Date();
+const calculateTimeLeft = (targetDate: Date, currentTime: Date) => {
+  const difference = +targetDate - +currentTime;
 
   const timeLeft: TimeLeft = {
     days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -16,19 +16,27 @@ const calculateTimeLeft = (targetDate: Date) => {
     minutes: Math.floor((difference / 1000 / 60) % 60),
     seconds: Math.floor((difference / 1000) % 60),
   };
+
   return timeLeft;
 };
 
-export const useCountdown = (targetDate?: Date) => {
-  const [timeLeft, setTimeLeft] = useState<TimeLeft | null>(calculateTimeLeft(targetDate));
+export const useCountdown = (targetDate: Date, onComplete: () => void, currentTimeOverride?: Date) => {
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate, currentTimeOverride || new Date()));
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft(targetDate ? calculateTimeLeft(targetDate) : null);
+      const newTimeLeft = calculateTimeLeft(targetDate, currentTimeOverride || new Date());
+      setTimeLeft(newTimeLeft);
+
+      if (newTimeLeft.days <= 0 && newTimeLeft.hours <= 0 && newTimeLeft.minutes <= 0 && newTimeLeft.seconds <= 0) {
+        clearInterval(timer);
+        onComplete();
+      }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, [targetDate, onComplete, currentTimeOverride]);
 
   return timeLeft;
 };
+
