@@ -3,67 +3,80 @@
     {
       "sstr": "3200",
       "dateTime": "2024-Dec-14 01:00",
-      "description": "Geminid Meteor Shower"
+      "description": "Geminid Meteor Shower",
+      "image": "https://vajiram-prod.s3.ap-south-1.amazonaws.com/What_is_3200_Phaethon_32fe8ae5bb.jpg"
     },
     {
       "sstr": "8p",
       "dateTime": "2024-Dec-22 10:00",
-      "description": "Ursid Meteor Shower"
+      "description": "Ursid Meteor Shower",
+      "image": "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1000w,f_auto,q_auto:best/newscms/2014_52/819881/141222-space-geminid-meteor-yankeetown-florida.jpg"
     },
     {
       "sstr": "196256",
       "dateTime": "2025-Jan-03 15:00",
-      "description": "Quadrantid Meteor Shower"
+      "description": "Quadrantid Meteor Shower",
+      "image": "https://starwalk.space/gallery/images/quadrantids-by-lamberto-sassoli/1920x1080.jpg"
     },
     {
       "sstr": "1861g1",
       "dateTime": "2025-Apr-22 13:00",
-      "description": "Lyrid Meteor Shower"
+      "description": "Lyrid Meteor Shower",
+      "image": "https://www.youcanseethemilkyway.com/wp-content/uploads/2022/10/db30a2e7-9880-4778-8f12-aacd80dc2218_1920x1080.jpg"
     },
     {
       "sstr": "1p",
       "dateTime": "2025-May-05 02:00",
-      "description": "Eta-Aquarid Meteor Shower"
+      "description": "Eta-Aquarid Meteor Shower",
+      "image": "https://cdn.mos.cms.futurecdn.net/tqGkDyPpMSYcYyMemgJWzS-1024-80.jpg.webp"
     },
     {
       "sstr": "2008y12",
       "dateTime": "2025-Jul-28 04:00",
-      "description": "Delta-Aquarid Meteor Shower"
+      "description": "Delta-Aquarid Meteor Shower",
+      "image": "https://www.lasm.org/wp-content/uploads/delta.jpg"
     },
     {
       "sstr": "",
       "dateTime": "2025-Aug-12 20:00",
-      "description": "Perseid Meteor Shower"
+      "description": "Perseid Meteor Shower",
+      "image": ""
     },
     {
       "sstr": "1p",
       "dateTime": "2025-Oct-21 12:00",
-      "description": "Orionid Meteor Shower"
+      "description": "Orionid Meteor Shower",
+      "image": ""
     },
     {
       "sstr": "2p",
       "dateTime": "2025-Nov-05 13:00",
-      "description": "S Taurid Meteor Shower"
+      "description": "S Taurid Meteor Shower",
+      "image": ""
     },
     {
       "sstr": "2004tg10",
       "dateTime": "2025-Nov-12 12:00",
-      "description": "N Taurid Meteor Shower"
+      "description": "N Taurid Meteor Shower",
+      "image": ""
     },
     {
       "sstr": "55p",
       "dateTime": "2025-Nov-17 18:00",
-      "description": "Leonid Meteor Shower"
+      "description": "Leonid Meteor Shower",
+      "image": ""
     },
     {
       "sstr": "3200",
       "dateTime": "2025-Dec-14 07:00",
-      "description": "Geminid Meteor Shower"
+      "description": "Geminid Meteor Shower",
+      "image": ""
     },
     {
       "sstr": "8p",
       "dateTime": "2025-Dec-22 16:00",
-      "description": "Ursid Meteor Shower"
+      "description": "Ursid Meteor Shower",
+      "image": ""
     }
   ]
 }

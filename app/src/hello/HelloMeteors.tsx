@@ -29,15 +29,9 @@ export const HelloMeteors = () => {
         }
     };
 
-    // For testing purposes, you can override the current time here
-    const currentTimeOverride = new Date(
-        new Date().getTime() + 2 * 24 * 60 * 60 * 1000 + 10 * 60 * 60 * 1000 + 6 * 60 * 1000,
-    ); // 2 days in the future
-
     const timeTillShower = useCountdown(
         new Date(shower?.dateTime || 0),
         showNotification,
-        currentTimeOverride,
     );
 
     return (
