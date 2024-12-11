@@ -6,3 +6,16 @@ export const getShowers = (_: FastifyRequest, reply: FastifyReply) => {
     .header("Cache-Control", "max-age=86400")
     .send({ showers: showersApi.getMeteorShowers() });
 };
+
+interface GetShowerRequest {
+  Params: {
+    sstr: string;
+  }
+}
+
+export const getShower = async (request: FastifyRequest<GetShowerRequest>, reply: FastifyReply) => {
+  const { sstr } = request.params;
+  reply.status(200)
+    .header("Cache-Control", "max-age=86400")
+    .send(await showersApi.getShowerInfo(sstr));
+};
