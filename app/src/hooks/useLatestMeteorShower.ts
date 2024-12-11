@@ -22,6 +22,6 @@ export const useLatestMeteorShower = () => {
     getUpcomingShower();
   }, [fetchShowers]);
 
-  return { ...upcomingShower, ...upcomingShowerDetails };
+  return { upcomingShower, upcomingShowerDetails };
 };
 
