@@ -1,16 +1,16 @@
-import { MeteorInformation } from "../meteor-information/MeteorInformation";
-import { useLatestMeteorShower } from "../hooks/useLatestMeteorShower";
-import { useCountdown } from "../hooks/calculateCountdown";
-import { useState } from "react";
-import { Button } from "@radix-ui/themes";
+import { MeteorInformation } from '../meteor-information/MeteorInformation';
+import { useLatestMeteorShower } from '../hooks/useLatestMeteorShower';
+import { useCountdown } from '../hooks/calculateCountdown';
+import { useState } from 'react';
+import { Button } from '@radix-ui/themes';
 
 export const HelloMeteors = () => {
-    const shower = useLatestMeteorShower();
+    const { upcomingShower: shower, upcomingShowerDetails } = useLatestMeteorShower();
     const [notificationEnabled, setNotificationEnabled] = useState(false);
 
     const showNotification = () => {
         if (shower) {
-            new Notification("Upcoming Meteor Shower", {
+            new Notification('Upcoming Meteor Shower', {
                 body: `The next meteor shower is the ${shower.description} on ${new Date(shower.dateTime).toLocaleString()}.`,
             });
             setNotificationEnabled(true);
@@ -18,11 +18,11 @@ export const HelloMeteors = () => {
     };
 
     const enableNotifications = () => {
-        if (Notification.permission === "granted") {
+        if (Notification.permission === 'granted') {
             showNotification();
-        } else if (Notification.permission !== "denied") {
-            Notification.requestPermission().then(permission => {
-                if (permission === "granted") {
+        } else if (Notification.permission !== 'denied') {
+            Notification.requestPermission().then((permission) => {
+                if (permission === 'granted') {
                     showNotification();
                 }
             });
@@ -30,16 +30,23 @@ export const HelloMeteors = () => {
     };
 
     // For testing purposes, you can override the current time here
-    const currentTimeOverride = new Date(new Date().getTime() + 2 * 24 * 60 * 60 * 1000 + 10 * 60 * 60 * 1000 + 6 * 60 * 1000); // 2 days in the future
+    const currentTimeOverride = new Date(
+        new Date().getTime() + 2 * 24 * 60 * 60 * 1000 + 10 * 60 * 60 * 1000 + 6 * 60 * 1000,
+    ); // 2 days in the future
 
-    const timeTillShower = useCountdown(new Date(shower?.dateTime || 0), showNotification, currentTimeOverride);
+    const timeTillShower = useCountdown(
+        new Date(shower?.dateTime || 0),
+        showNotification,
+        currentTimeOverride,
+    );
 
     return (
         <>
             <div className="w-full h-screen flex items-center justify-center flex-col gap-4 relative">
                 <h1 className="flex text-3xl font-medium">Next meteor shower is in:</h1>
                 <span className="text-5xl font-black">
-                    {timeTillShower?.days || 0} days {timeTillShower?.hours || 0} hours {timeTillShower?.minutes || 0} minutes {timeTillShower?.seconds || 0} seconds
+                    {timeTillShower?.days || 0} days {timeTillShower?.hours || 0} hours{' '}
+                    {timeTillShower?.minutes || 0} minutes {timeTillShower?.seconds || 0} seconds
                 </span>
                 {shower?.description}
                 <Button
@@ -48,11 +55,10 @@ export const HelloMeteors = () => {
                     onClick={enableNotifications}
                     disabled={notificationEnabled}
                 >
-                    {notificationEnabled ? "Notifications Enabled" : "Enable Notifications"}
+                    {notificationEnabled ? 'Notifications Enabled' : 'Enable Notifications'}
                 </Button>
-                <MeteorInformation />
+                <MeteorInformation details={upcomingShowerDetails} />
             </div>
         </>
     );
 };
-

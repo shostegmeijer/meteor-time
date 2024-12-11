@@ -3,7 +3,7 @@ import { ShowerInfo } from '@meteor-time/shared';
 
 export interface Shower { sstr: string; dateTime: Date; description: string }
 
-export type ShowerDetails = ShowerInfo | {
+export type ShowerDetails = ShowerInfo & {
     discovery: { date: Date };
     historicalApproaches: { date: Date }[];
     orbitalInformation: { firstObservation: Date };
@@ -22,7 +22,7 @@ export const useApi = () => {
             discovery: { ...data.discovery, date: new Date(data.discovery.date) },
             historicalApproaches: data.historicalApproaches.map(historicalApproach => ({ ...historicalApproach, date: new Date(historicalApproach.date) })),
             orbitalInformation: { ...data.orbitalInformation, firstObservation: new Date(data.orbitalInformation.firstObservation) }
-        };
+        } as unknown as ShowerDetails
     }, []);
 
     const fetchNeoWs = useCallback(async (): Promise<{ greeting: string }> => {
