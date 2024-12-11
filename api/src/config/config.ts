@@ -6,6 +6,7 @@ interface Config {
     REDIS_URL: string;
     MONGO_URL: string;
     APP_URL: string;
+    NASA_API_KEY: string;
     NODE_APP_INSTANCE: string;
 }
 
