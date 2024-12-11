@@ -51,7 +51,7 @@ export const HelloMeteors = () => {
                 >
                     {notificationEnabled ? 'Notifications Enabled' : 'Enable Notifications'}
                 </Button>
-                <MeteorInformation details={upcomingShowerDetails} />
+                <MeteorInformation details={upcomingShowerDetails} image={shower.image} />
             </div>
         </>
     );

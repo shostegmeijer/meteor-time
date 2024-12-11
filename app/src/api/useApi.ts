@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { ShowerInfo } from '@meteor-time/shared';
 
-export interface Shower { sstr: string; dateTime: Date; description: string }
+export interface Shower { sstr: string; dateTime: Date; description: string; image: string }
 
 export type ShowerDetails = ShowerInfo & {
     discovery: { date: Date };
@@ -11,7 +11,7 @@ export type ShowerDetails = ShowerInfo & {
 
 export const useApi = () => {
     const fetchShowers = useCallback(async (): Promise<{ showers: Shower[] }> => {
-        const data = await fetchJson<{ showers: { sstr: string; dateTime: string; description: string }[] }>(`/api/showers`);
+        const data = await fetchJson<{ showers: { sstr: string; dateTime: string; description: string; image: string }[] }>(`/api/showers`);
         return { ...data, showers: data.showers.map(s => ({ ...s, dateTime: new Date(s.dateTime) })) };
     }, []);
 
