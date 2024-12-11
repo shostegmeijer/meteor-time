@@ -1,9 +1,11 @@
 import { useCallback } from "react";
 
+export interface Shower { dateTime: Date; description: string }
 
 export const useApi = () => {
-    const fetchShowers = useCallback(async (): Promise<{ greeting: string }> => {
-        return await fetchJson<{ greeting: string }>(`/api/showers`);
+    const fetchShowers = useCallback(async (): Promise<{ showers: Shower[] }> => {
+        const data = await fetchJson<{ showers: { dateTime: string; description: string }[] }>(`/api/showers`);
+        return { ...data, showers: data.showers.map(s => ({ ...s, dateTime: new Date(s.dateTime) })) };
     }, []);
 
     const fetchNeoWs = useCallback(async (): Promise<{ greeting: string }> => {
