@@ -1,3 +1,4 @@
+export * from "./model";
 export * from "./util/filters.js";
 export * from "./util/groupBy.js";
 export * from "./util/mapValues.js";
