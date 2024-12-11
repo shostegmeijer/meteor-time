@@ -30,13 +30,30 @@ export const MeteorInformation: React.FC<{ details: ShowerDetails | null }> = ({
                                 </IconButton>
                             </header>
                             <main>
-                                <Text size="8">{details.fullName}</Text>
-                                <div>
+                                <Text as="p" size="8" className="mb-4">
+                                    {details.fullName}
+                                </Text>
+                                <div className="flex flex-col gap-4">
+                                    <Text size="7" weight="bold">
+                                        Discovery
+                                    </Text>
+                                    <Text as="p" size="5">
+                                        {details.discovery.discovery}
+                                    </Text>
+                                </div>
+
+                                <div className="flex flex-col gap-4">
                                     <Text size="7" weight="bold">
                                         Physical Parameters
                                     </Text>
                                     {details.physicalParameters.map((parameter, index) => (
-                                        <div key={index} className="grid grid-cols-2">
+                                        <div
+                                            style={{
+                                                display: 'grid',
+                                                gridGap: '1rem',
+                                                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                                            }}
+                                        >
                                             <Text as="p" size="6" weight="bold">
                                                 {parameter.title}
                                             </Text>
