@@ -4,12 +4,17 @@ import { AnimatePresence, motion } from 'motion/react';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Shower } from '../api/useApi';
 
-export const MeteorCalendar: React.FC<{ meteors: Shower[], className: string }> = ({ meteors, className }) => {
+export const MeteorCalendar: React.FC<{ meteors: Shower[]; className: string }> = ({
+    meteors,
+    className,
+}) => {
     const [open, setOpen] = useState(false);
 
     return (
         <>
-            <Button variant="outline" onClick={() => setOpen(true)} className={className}>Upcoming showers</Button>
+            <Button variant="outline" onClick={() => setOpen(true)} className={className}>
+                Upcoming showers
+            </Button>
             <AnimatePresence>
                 {open && meteors && (
                     <motion.div
@@ -31,8 +36,20 @@ export const MeteorCalendar: React.FC<{ meteors: Shower[], className: string }> 
                                     </IconButton>
                                 </header>
                                 <main>
-                                    <Heading size="6" className='mb-4'>Upcoming Calendar</Heading>
-                                    {meteors.map(m => <div className='mb-4 pt-4 border-t-white/10 border-t'><Heading size="3">{m.dateTime.toLocaleString()}</Heading><span>{m.description}</span></div>)}
+                                    <Heading size="6" className="mb-4">
+                                        Upcoming Calendar
+                                    </Heading>
+                                    {meteors.map((m) => (
+                                        <a
+                                            href={`/${m.sstr}`}
+                                            className="block hover:bg-white/5 pb-4 pt-4 px-4 border-t-white/10 border-t"
+                                        >
+                                            <Heading size="3">
+                                                {m.dateTime.toLocaleString()}
+                                            </Heading>
+                                            <span>{m.description}</span>
+                                        </a>
+                                    ))}
                                 </main>
                             </div>
                         </Card>
