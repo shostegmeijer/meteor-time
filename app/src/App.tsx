@@ -30,7 +30,7 @@ const withLayout = (element: React.ReactNode) => {
                 <PixiMeteorParticles meteorType="E" />
             </div>
             <header className="fixed">{header}</header>
-            <div className="page">{element}</div>
+            <div className="page relative z-10">{element}</div>
         </div>
     );
 };
