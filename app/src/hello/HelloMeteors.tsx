@@ -7,14 +7,14 @@ import { MeteorCalendar } from '../meteor-calendar/MeteorCalendar';
 
 export const HelloMeteors = () => {
     const { upcomingShower: shower, upcomingShowerDetails, showers } = useLatestMeteorShower();
-    const [notificationEnabled, setNotificationEnabled] = useState(false);
+    const [notificationSent, setNotificationSent] = useState(false);
 
     const showNotification = () => {
-        if (shower) {
+        if (shower && !notificationSent) {
             new Notification('Upcoming Meteor Shower', {
                 body: `The next meteor shower is the ${shower.description} on ${new Date(shower.dateTime).toLocaleString()}.`,
             });
-            setNotificationEnabled(true);
+            setNotificationSent(true);
         }
     };
 
@@ -22,15 +22,12 @@ export const HelloMeteors = () => {
         if (Notification.permission === 'granted') {
             showNotification();
         } else if (Notification.permission !== 'denied') {
-            Notification.requestPermission().then((permission) => {
-                if (permission === 'granted') {
-                    showNotification();
-                }
-            });
+            Notification.requestPermission();
         }
     };
 
-    const timeTillShower = useCountdown(new Date(shower?.dateTime || 0), showNotification);
+    const timeTillShower = useCountdown(shower?.dateTime, showNotification);
+    const granted = Notification.permission === 'granted';
 
     return (
         <>
@@ -45,9 +42,9 @@ export const HelloMeteors = () => {
                     className="fixed top-4 right-4 z-0"
                     variant="outline"
                     onClick={enableNotifications}
-                    disabled={notificationEnabled}
+                    disabled={granted}
                 >
-                    {notificationEnabled ? 'Notifications Enabled' : 'Enable Notifications'}
+                    {granted ? 'Notifications Enabled' : 'Enable Notifications'}
                 </Button>
                 <MeteorInformation details={upcomingShowerDetails} image={shower?.image ?? null} />
                 {showers && <MeteorCalendar className="fixed bottom-4 right-4" meteors={showers} />}
@@ -55,3 +52,4 @@ export const HelloMeteors = () => {
         </>
     );
 };
+

@@ -20,7 +20,7 @@ const calculateTimeLeft = (targetDate: Date, currentTime: Date) => {
   return timeLeft;
 };
 
-export const useCountdown = (targetDate: Date, onComplete: () => void, currentTimeOverride?: Date) => {
+export const useCountdown = (targetDate: Date = new Date("2026"), onComplete: () => void, currentTimeOverride?: Date) => {
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(targetDate, currentTimeOverride || new Date()));
 
   useEffect(() => {
