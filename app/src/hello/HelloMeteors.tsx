@@ -1,7 +1,6 @@
-import { MeteorInformation } from '../meteor-information/MeteorInformation';
-import { useLatestMeteorShower } from '../hooks/useLatestMeteorShower';
 import { useCountdown } from '../hooks/calculateCountdown';
-import MeteorParticleEngine from '../meteors/Meteors';
+import { useLatestMeteorShower } from '../hooks/useLatestMeteorShower';
+import { MeteorInformation } from '../meteor-information/MeteorInformation';
 
 export const HelloMeteors = () => {
     const { upcomingShower: shower, upcomingShowerDetails } = useLatestMeteorShower();
@@ -19,7 +18,7 @@ export const HelloMeteors = () => {
                     </span>
                 ) : null}
                 {shower?.description}
-                <MeteorInformation />
+                <MeteorInformation details={upcomingShowerDetails} />
             </div>
         </>
     );
