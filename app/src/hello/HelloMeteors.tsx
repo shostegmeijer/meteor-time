@@ -3,9 +3,10 @@ import { useLatestMeteorShower } from '../hooks/useLatestMeteorShower';
 import { useCountdown } from '../hooks/calculateCountdown';
 import { useState } from 'react';
 import { Button } from '@radix-ui/themes';
+import { MeteorCalendar } from '../meteor-calendar/MeteorCalendar';
 
 export const HelloMeteors = () => {
-    const { upcomingShower: shower, upcomingShowerDetails } = useLatestMeteorShower();
+    const { upcomingShower: shower, upcomingShowerDetails, showers } = useLatestMeteorShower();
     const [notificationEnabled, setNotificationEnabled] = useState(false);
 
     const showNotification = () => {
@@ -49,6 +50,7 @@ export const HelloMeteors = () => {
                     {notificationEnabled ? 'Notifications Enabled' : 'Enable Notifications'}
                 </Button>
                 <MeteorInformation details={upcomingShowerDetails} image={shower?.image ?? null} />
+                {showers && <MeteorCalendar className="fixed bottom-4 right-4" meteors={showers} />}
             </div>
         </>
     );

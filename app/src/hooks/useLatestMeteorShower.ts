@@ -4,6 +4,7 @@ import { Shower, ShowerDetails, useApi } from "../api/useApi";
 export const useLatestMeteorShower = () => {
   const { fetchShowers, fetchShower } = useApi();
   const [upcomingShower, setUpcomingShower] = useState<Shower | null>(null);
+  const [showers, setShowers] = useState<Shower[] | null>(null);
   const [upcomingShowerDetails, setUpcomingShowerDetails] = useState<ShowerDetails | null>(null);
 
   useEffect(() => {
@@ -17,11 +18,12 @@ export const useLatestMeteorShower = () => {
 
       const showerInfo = await fetchShower(sortedShowers[0].sstr);
       setUpcomingShowerDetails(showerInfo);
+      setShowers(showers);
     };
 
     getUpcomingShower();
   }, [fetchShowers]);
 
-  return { upcomingShower, upcomingShowerDetails };
+  return { upcomingShower, upcomingShowerDetails, showers };
 };
 

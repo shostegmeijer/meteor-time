@@ -10,7 +10,7 @@ import PixiMeteorParticles from "./meteors/Meteors";
 const App: React.FC = () => {
     return (
         <Theme accentColor="violet" radius="full" appearance="dark" className="bg-transparent">
-            <div className="bg-gradient-to-b from-[#24192E] to-[#00111C] relative -z-10">
+            <div className="bg-gradient-to-b from-[#00121F] to-[#0D0316] relative -z-10">
                 <Routes>
                     <Route path="/" element={withLayout(<HelloMeteors />)}></Route>
                 </Routes>
