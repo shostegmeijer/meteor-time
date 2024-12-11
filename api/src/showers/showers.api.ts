@@ -1,11 +1,11 @@
 import { Cacheable } from '@type-cacheable/core';
 import meteorShowers from '../data/meteor-showers.json' with { type: 'json' };
-import { Nullable } from '@meteor-time/shared';
+import { Nullable, ShowerInfo } from '@meteor-time/shared';
 
 class ShowersApi {
   @Cacheable({ ttlSeconds: 60 * 60 * 24 * 7 })
-  getMeteorShowers() {
-    return meteorShowers.events;
+  async getMeteorShowers() {
+    return await meteorShowers.events;
   }
 
   @Cacheable({ ttlSeconds: 60 * 60 * 24 * 7 })
@@ -53,14 +53,7 @@ interface SBDBResponse {
   orbit_defs: Record<string, OrbitDef>;
   orbit: {
     first_obs: string;
-    elements: {
-      title: string;
-      value: string;
-      sigma: string;
-      name: string;
-      units: string;
-      label: string;
-    }[];
+    elements: ShowerInfo['orbitalInformation']['elements'];
   };
   object: {
     des: string;
@@ -73,12 +66,7 @@ interface SBDBResponse {
       name: string;
     }
   };
-  discovery: {
-    location: string;
-    who: string;
-    date: string;
-    discovery: string;
-  };
+  discovery: ShowerInfo['discovery'];
   ca_data: {
     cd: string;
     dist_max: string;
@@ -86,29 +74,6 @@ interface SBDBResponse {
     dist: string;
     v_rel: string;
   }[];
-}
-
-interface ShowerInfo {
-  shortName: string;
-  fullName: string;
-  physicalParameters: {
-    title: string;
-    description: string;
-    units: Nullable<string>;
-    value: string;
-  }[];
-  historicalApproaches: {
-    date: string;
-    distanceToEarthInAu: string;
-    minDistanceToEarthInAu: string;
-    maxDistanceToEarthInAu: string;
-    relativeVelocityInKmPerSec: string;
-  }[];
-  discovery: SBDBResponse["discovery"];
-  orbitalInformation: {
-    firstObservation: string;
-    elements: SBDBResponse["orbit"]["elements"]
-  };
 }
 
 const mapSBDBResponseToShowerInfo = (response: SBDBResponse): ShowerInfo => {
