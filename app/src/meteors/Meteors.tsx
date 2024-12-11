@@ -1,5 +1,7 @@
+
 import React, { useEffect, useRef, useState } from 'react';
 import * as PIXI from 'pixi.js';
+import { GlowFilter } from '@pixi/filter-glow';
 
 interface MeteorOptions {
     app: PIXI.Application;
@@ -7,6 +9,9 @@ interface MeteorOptions {
     maxHeight: number;
 }
 
+interface MeteorParticleEngineProps {
+    meteorType: string; // Accept meteor type as a prop
+}
 
 class Meteor {
     private app: PIXI.Application;
@@ -18,28 +23,100 @@ class Meteor {
     private angle: number = 0;
     private opacity: number = 0;
 
-    constructor(options: MeteorOptions) {
+    private type: string;
+
+    constructor(options: MeteorOptions, type: string) {
         this.app = options.app;
         this.maxWidth = options.maxWidth;
         this.maxHeight = options.maxHeight;
+        this.type = type;
 
-        // Create a simple sprite instead of complex graphics
         this.sprite = new PIXI.Sprite(this.createMeteorTexture());
+        this.sprite.filters = [new GlowFilter({ distance: 30, outerStrength: 0.75, innerStrength: 1, color: 0xffffff })];
         this.app.stage.addChild(this.sprite);
         this.reset();
     }
 
     private createMeteorTexture(): PIXI.Texture {
-        // Create a simple linear gradient texture
         const canvas = document.createElement('canvas');
         canvas.width = 100;
         canvas.height = 2;
         const context = canvas.getContext('2d')!;
 
-        const gradient = context.createLinearGradient(0, 0, 100, 0);
-        gradient.addColorStop(1, 'rgba(255,255,255,0.8)');
-        gradient.addColorStop(0.5, 'rgba(101,178,255,0.5)');
-        gradient.addColorStop(0, 'rgba(101,178,255,0)');
+        let gradient;
+
+        switch (this.type) {
+            case 'A':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(101,0,0,1)');
+                gradient.addColorStop(0.8, 'rgba(255,100,100,0.5)');
+                gradient.addColorStop(0, 'rgba(255,0,0,0)');
+                break;
+            case 'B':
+            case 'F':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(255,255,255,1)');
+                gradient.addColorStop(0.8, 'rgba(101,178,255,0.5)');
+                gradient.addColorStop(0, 'rgba(255,162,39,0)');
+                break;
+            case 'C':
+            case 'G':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(101,178,255,1)');
+                gradient.addColorStop(0.8, 'rgba(0,0,0,0.5)');
+                gradient.addColorStop(0, 'rgba(0,0,0,0)');
+                break;
+            case 'D':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(255,101,0,1)');
+                gradient.addColorStop(0.8, 'rgba(178,0,0,0.5)');
+                gradient.addColorStop(0, 'rgba(255,101,0,0)');
+                break;
+            case 'E':
+            case 'M':
+            case 'P':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(255,101,0,1)');
+                gradient.addColorStop(0.8, 'rgba(101,178,255,0.5)');
+                gradient.addColorStop(0, 'rgba(255,101,0,0)');
+                break;
+            case 'Q':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(178,0,0,1)');
+                gradient.addColorStop(0.8, 'rgba(101,178,255,0.5)');
+                gradient.addColorStop(0, 'rgba(255,101,0,0)');
+                break;
+            case 'R':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(178,0,0,1)');
+                gradient.addColorStop(0.8, 'rgba(101,178,255,0.5)');
+                gradient.addColorStop(0, 'rgba(255,101,0,0)');
+                break;
+            case 'S':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(178,0,0,1)');
+                gradient.addColorStop(0.8, 'rgba(101,178,255,0.5)');
+                gradient.addColorStop(0, 'rgba(255,101,0,0)');
+                break;
+            case 'T':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(178,101,255,1)');
+                gradient.addColorStop(0.8, 'rgba(178,178,178,0.5)');
+                gradient.addColorStop(0, 'rgba(178,178,178,0)');
+                break;
+            case 'V':
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(178,0,0,1)');
+                gradient.addColorStop(0.8, 'rgba(101,178,255,0.5)');
+                gradient.addColorStop(0, 'rgba(255,101,0,0)');
+                break;
+            default:
+                gradient = context.createLinearGradient(0, 0, 100, 0);
+                gradient.addColorStop(1, 'rgba(255,255,255,1)');
+                gradient.addColorStop(0.8, 'rgba(101,178,255,0.5)');
+                gradient.addColorStop(0, 'rgba(255,162,39,0)');
+                break;
+        }
 
         context.fillStyle = gradient;
         context.fillRect(0, 0, 100, 3);
@@ -48,59 +125,49 @@ class Meteor {
     }
 
     reset(): void {
-        // Randomize starting position
         const startX = Math.random() * this.maxWidth;
-        const startY = -50; // Start above the screen
+        const startY = -50;
 
-        // Simplified meteor properties
         this.speed = 5 + Math.random() * 10;
-        this.speed *= this.sprite.scale.x; // Adjust speed based on scale
-        this.angle = Math.PI * 0.5 + (Math.random() * 0.2 - 0.1); // Ensure downward trajectory with slight randomness
+        this.speed *= this.sprite.scale.x;
+        this.angle = Math.PI * 0.5 + (Math.random() * 0.2 - 0.1);
         this.opacity = 0.7 + Math.random() * 0.3;
 
-        // Position and style the sprite
         this.sprite.x = startX;
         this.sprite.y = startY;
-        this.sprite.rotation = this.angle; // Set the rotation
+        this.sprite.rotation = this.angle;
         this.sprite.alpha = this.opacity;
         this.sprite.scale.set(1 + Math.random());
     }
 
     update(): void {
-        // Move meteor
         this.sprite.x += Math.cos(this.angle) * this.speed;
         this.sprite.y += Math.sin(this.angle) * this.speed;
 
-        // Random opacity fade
         this.opacity = 0.3 + Math.random() * 0.7;
         this.sprite.alpha = this.opacity;
 
-        // Reset if off screen
-        if (this.sprite.y > this.maxHeight + 100 ||
-            this.sprite.x > this.maxWidth + 100) {
+        if (this.sprite.y > this.maxHeight + 100 || this.sprite.x > this.maxWidth + 100) {
             this.reset();
         }
     }
 }
 
-
-const MeteorParticleEngine: React.FC = () => {
+const MeteorParticleEngine: React.FC<MeteorParticleEngineProps> = ({ meteorType }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const [meteorCount] = useState(5);
     const pixiAppRef = useRef<PIXI.Application | null>(null);
     const meteorsRef = useRef<Meteor[]>([]);
+    const [meteorCount] = useState(5);
 
     useEffect(() => {
-        // Ensure canvas exists and we haven't already initialized
         if (!canvasRef.current || pixiAppRef.current) return;
 
-        // Create PixiJS application with reduced complexity
         const app = new PIXI.Application({
             view: canvasRef.current,
             width: window.innerWidth,
             height: window.innerHeight,
             backgroundColor: 0x000033,
-            antialias: false, // Reduce shader complexity
+            antialias: false,
             resolution: window.devicePixelRatio || 1,
             autoDensity: true,
             resizeTo: window,
@@ -109,7 +176,6 @@ const MeteorParticleEngine: React.FC = () => {
 
         pixiAppRef.current = app;
 
-        // Create starry background with simple approach
         const stars = new PIXI.Graphics();
         stars.beginFill(0xFFFFFF);
         for (let i = 0; i < 150; i++) {
@@ -122,23 +188,21 @@ const MeteorParticleEngine: React.FC = () => {
         stars.endFill();
         app.stage.addChild(stars);
 
-        // Create meteors
         const meteors = Array.from({ length: meteorCount }, () =>
             new Meteor({
                 app,
                 maxWidth: app.screen.width,
                 maxHeight: app.screen.height
-            })
+            }, meteorType)
         );
         meteorsRef.current = meteors;
 
-        // Animation loop
         const animate = () => {
             meteors.forEach(meteor => meteor.update());
         };
 
         app.ticker.add(animate);
-    }, [meteorCount]);
+    }, [meteorCount, meteorType]);
 
     return (
         <canvas

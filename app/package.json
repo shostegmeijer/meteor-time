@@ -4,6 +4,7 @@
     "private": true,
     "type": "module",
     "dependencies": {
+        "@pixi/filter-glow": "^5.2.1",
         "@pixi/react": "^7.1.2",
         "@radix-ui/themes": "^3.1.6",
         "@types/react": "^18.2.64",

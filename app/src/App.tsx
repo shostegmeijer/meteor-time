@@ -25,7 +25,7 @@ const withLayout = (element: React.ReactNode) => {
     return (
         <div className="route">
             <div className="fixed w-full h-full top-0 left-0">
-                <PixiMeteorParticles />
+                <PixiMeteorParticles meteorType="E" />
             </div>
             {header}
             <div className="page">{element}</div>
