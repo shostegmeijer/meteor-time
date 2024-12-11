@@ -1,6 +1,14 @@
 {
   "events": [
     {
+      "dateTime": "2024-Dec-14 01:00",
+      "description": "Geminid Meteor Shower"
+    },
+    {
+      "dateTime": "2024-Dec-22 10:00",
+      "description": "Ursid Meteor Shower"
+    },
+    {
       "dateTime": "2025-Jan-03 15:00",
       "description": "Quadrantid Meteor Shower"
     },
